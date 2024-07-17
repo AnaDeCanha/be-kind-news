@@ -1,7 +1,7 @@
 import useSWR from "swr";
 
-// Define the fetcher function
-const fetcher = async (url) => {
+// Fetcher function
+const fetcher = async (url: string) => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error("An error occurred while fetching the data.");
@@ -9,9 +9,8 @@ const fetcher = async (url) => {
   return response.json();
 };
 
-// Custom hook
-const useFetchData = (url, options = {}) => {
-  const { data, error, isLoading, mutate } = useSWR(url, fetcher, options);
+const useFetchData = (url: string, options = {}) => {
+  const { data, error, mutate } = useSWR(url, fetcher, options);
 
   return {
     data,
