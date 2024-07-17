@@ -1,13 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import useSWR from "swr";
+import useFetchData from "../hooks/useFetchData";
 
 interface Source {
   id: string | null;
@@ -35,10 +34,8 @@ const URL: String =
   "https://newsapi.org/v2/top-headlines?country=us&apiKey=579700442f3b4257878e1d4cee6e714d";
 const MAX_CONTENT: number = 5;
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function Home() {
-  const { data, error } = useSWR<ApiResponse>(URL, fetcher);
+  const { data } = useFetchData(URL);
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
@@ -60,8 +57,8 @@ export default function Home() {
     );
   });
 
-  if (error) return <div>Error: {error.message}</div>;
-  if (!data) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+  // if (!data) return <div>Loading...</div>;
 
   return (
     <>
