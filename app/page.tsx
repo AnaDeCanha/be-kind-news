@@ -65,7 +65,6 @@ export default function Home() {
 
   return (
     <>
-      <Button>Start</Button>
       <ul>{listHeadlines}</ul>
     </>
   );
